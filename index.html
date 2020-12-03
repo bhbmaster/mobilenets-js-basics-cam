@@ -31,29 +31,24 @@
             video.srcObject = stream;
 
             // messing with canvas stuff 
-
             // console.log("Video size:", video.clientWidth, video.clientHeight);
-
             // canvas.style = `height: ${video.clientHeight/10}px; width: ${video.clientWidth/10}px`
-
             // console.log("Canvas size:", canvas.clientWidth, canvas.clientHeight);
 
             async function predict() {
-                // to take out frame we need canvas
-                
+                // to take out image from frame we need canvas. canvas can be pumped into classify
+
+                // context.drawImage(video,0,0,500,500);
                 // context.drawImage(video,0,0,video.clientWidth,video.clientHeight);
                 context.drawImage(video,0,0) // or we can use this method
 
-                // context.drawImage(video,0,0,500,500);
-
-                const predictions = await model.classify(canvas);
+                const predictions = await model.classify(canvas)
                 answer.innerHTML = `<h3>Predictions:</h3><h4>* 1st: ${predictions[0].className} (${(predictions[0].probability * 100).toFixed(4)}%)</h4><h4>* 2nd: ${predictions[1].className} (${(predictions[1].probability * 100).toFixed(4)}%)</h4><h4>* 3rd: ${predictions[2].className} (${(predictions[2].probability * 100).toFixed(4)}%)</h4>`
 
                 requestAnimationFrame(predict) // its like setTimeout every 16 ms (60 fps)
             }
             predict();
-            // instead of calling predict and requestAnimationFram inside it which just calls predict 60 times a second - we can just do this - setInterval(predict,16);
-
+            // instead of calling predict and requestAnimationFrame inside the function, which just calls predict ~60 times a second, we can just do this: setInterval(predict,16) // call predict every 16ms = ~ 60 fps
 
         })();
     </script>
