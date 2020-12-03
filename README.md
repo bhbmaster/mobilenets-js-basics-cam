@@ -4,15 +4,16 @@ Start liveserver (VSCode extension) or php:
 
     php -S localhost:1111
 
-Then view from localhost browser or over https on phone browser (to get phone camera).
+Then view from browser on localhost computer or over https on phone browser. If not localhost, must be https to get camera.
 
-To get over https use ngrok (install it):
+To get access over https use ngrok (install it if its missing):
 
     ngrok http <port>
 
-Change <port> to match the port liveserver or php maps to. For php most likely you used 1111 (but you could have used any), and for liveserver most likely it gave you 5500.
+Change <port> to match your http server port.
+So with liveserver it should be 5500 by default, and with php we used 1111.
 
-Example output will have lines like this:
+You will see output like this:
 
     Session Status                online                                                                                                                  
     Session Expires               7 hours, 53 minutes                                                                                                     
@@ -22,6 +23,8 @@ Example output will have lines like this:
     Forwarding                    http://e1d21550b36.ngrok.io -> http://localhost:5500                                                                   
     Forwarding                    https://e1d21550b36.ngrok.io -> http://localhost:5500
 
-Then when ngrok starts, it will give you an http and https tunneled site. Use the https one.
+Ngrok will give you an http and https tunneled site. They can be accessed remotely and you will see your webserver.
 
-Cameras implemented with navigator.mediaDevices only work localhost or https.
+* Open the https link from a remote browser to see the camera and prediction*
+
+Cameras implemented using navigator.mediaDevices module only work over http if you are localhost (https locally too). If remote, you must use https.

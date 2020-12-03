@@ -41,7 +41,8 @@
             async function predict() {
                 // to take out frame we need canvas
                 
-                context.drawImage(video,0,0,video.clientWidth,video.clientHeight);
+                // context.drawImage(video,0,0,video.clientWidth,video.clientHeight);
+                context.drawImage(video,0,0) // or we can use this method
 
                 // context.drawImage(video,0,0,500,500);
 
